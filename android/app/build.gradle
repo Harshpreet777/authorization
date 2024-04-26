@@ -58,6 +58,26 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "default"
+
+    productFlavors{
+        prod{
+            resValue "string", "app_name", "Boilerplate App"
+        }
+        dev{
+            resValue "string", "app_name", "Boilerplate App DEV"
+            // commented as it was adding .dev suffix in the original bundleId/ applicationId in android.
+            //applicationIdSuffix ".dev"
+        }
+        
+        qa{
+            resValue "string", "app_name", "Boilerplate App QA"
+             // commented as it was adding .qa suffix in the original bundleId/ applicationId in android.
+            //applicationIdSuffix ".qa"
+        }
+
+    }
 }
 
 flutter {

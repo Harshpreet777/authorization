@@ -15,7 +15,7 @@ class APIBase {
 
   Dio? getDio({bool? isAuthorizationRequired = false}) {
     _dio = Dio(BaseOptions(
-      baseUrl: _apiRoutes.baseUrl,
+      baseUrl: APIRoutes.baseUrl,
       connectTimeout: timeoutDuration,
       receiveTimeout: timeoutDuration,
     ));
@@ -77,7 +77,7 @@ class APIBase {
     try {
       response = await dio
           .get(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
           )
           .timeout(timeoutDuration);
 
@@ -112,7 +112,7 @@ class APIBase {
     try {
       response = await dio
           .post(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
             data: data,
           )
           .timeout(timeoutDuration);
@@ -147,7 +147,7 @@ class APIBase {
     try {
       response = await dio
           .patch(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
             data: data,
           )
           .timeout(timeoutDuration);
@@ -181,7 +181,7 @@ class APIBase {
     try {
       response = await dio
           .put(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
             data: data,
           )
           .timeout(timeoutDuration);
@@ -216,7 +216,7 @@ class APIBase {
 
       response = await dio
           .delete(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
             data: data,
           )
           .timeout(timeoutDuration);
