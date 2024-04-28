@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/constants/string_constant.dart';
 import 'package:flutter_boilerplate/main.dart';
 import 'package:flutter_boilerplate/views/widgets/common_text_widget.dart';
-import 'package:localization/localization.dart';
 
 import '../../constants/routes_constant.dart';
 

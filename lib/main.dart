@@ -13,14 +13,14 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-  static _MyAppState? of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyAppState>();
+  State<MyApp> createState() => MyAppState();
+  static MyAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<MyAppState>();
 }
 
-class _MyAppState extends State<MyApp> {
-  Locale? currentLocale = Locale('en');
-  String localeName = "es";
+class MyAppState extends State<MyApp> {
+  Locale? currentLocale = const Locale('en');
+  String localeName = "en";
 
   void setLocale(Locale value) {
     setState(() {
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       ],
       onGenerateRoute: PageRouter.generateRoute,
       theme: lightTheme(context),
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en'),
         Locale('es'),
       ],
