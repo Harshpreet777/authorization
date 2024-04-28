@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
 class CommonTextWidget extends StatelessWidget {
   final String data;
@@ -21,7 +22,7 @@ class CommonTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      data,
+      data.i18n(),
       style: style ??
           Theme.of(context)
               .textTheme
