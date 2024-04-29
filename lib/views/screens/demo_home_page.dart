@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/constants/string_constant.dart';
 
 import 'package:flutter_boilerplate/views/widgets/common_text_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/routes_constant.dart';
 import '../../flavors/main_common.dart';
+import '../../viewmodels/material_app_viewmodel.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -28,6 +30,8 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       MyApp.of(context)!.setLocale(const Locale('en'));
     }
+
+    Provider.of<MaterialAppViewModel>(context, listen: false).count++;
   }
 
   @override
@@ -44,6 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
             CommonTextWidget(
               StringConstants().welcomeText,
             ),
+            CommonTextWidget(
+                "Cart Count: ${Provider.of<MaterialAppViewModel>(context, listen: false).count}"),
             InkWell(
               onTap: () {
                 Navigator.pushNamed(context, AppRoutes.demoPage);

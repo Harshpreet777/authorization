@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/viewmodels/material_app_viewmodel.dart';
+import 'package:flutter_boilerplate/views/widgets/common_text_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/routes_constant.dart';
 
@@ -10,10 +13,15 @@ class DemoPage extends StatelessWidget {
     return Scaffold(
       body: InkWell(
           onTap: () {
+            Provider.of<MaterialAppViewModel>(context, listen: false).count++;
             Navigator.pushReplacementNamed(context, AppRoutes.homePageRoute,
                 arguments: "Test");
           },
-          child: const Placeholder()),
+          child: Container(
+            alignment: Alignment.center,
+            child: CommonTextWidget(
+                "Cart Count >> ${Provider.of<MaterialAppViewModel>(context, listen: false).count}"),
+          )),
     );
   }
 }
