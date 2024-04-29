@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/constants/string_constant.dart';
 import 'package:flutter_boilerplate/viewmodels/material_app_viewmodel.dart';
 import 'package:flutter_boilerplate/views/widgets/common_text_widget.dart';
+import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/routes_constant.dart';
@@ -20,7 +22,7 @@ class DemoPage extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             child: CommonTextWidget(
-                "Cart Count >> ${Provider.of<MaterialAppViewModel>(context, listen: false).count}"),
+                "${StringConstants().cartCount.i18n()} >> ${Provider.of<MaterialAppViewModel>(context, listen: false).count}"),
           )),
     );
   }
