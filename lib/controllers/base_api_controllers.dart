@@ -7,14 +7,14 @@ import '../models/response/base_response_model.dart';
 
 class APIBase {
   Dio? _dio;
-  final _apiRoutes = APIRoutes();
+  //final _apiRoutes = APIRoutes();
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   Duration timeoutDuration = const Duration(seconds: 180);
 
   Dio? getDio({bool? isAuthorizationRequired = false}) {
     _dio = Dio(BaseOptions(
-      baseUrl: _apiRoutes.baseUrl,
+      baseUrl: APIRoutes.baseUrl,
       connectTimeout: timeoutDuration,
       receiveTimeout: timeoutDuration,
     ));
@@ -78,7 +78,7 @@ class APIBase {
     try {
       response = await dio
           .get(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
           )
           .timeout(timeoutDuration);
 
@@ -114,7 +114,7 @@ class APIBase {
     try {
       response = await dio
           .post(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
             data: data,
           )
           .timeout(timeoutDuration);
@@ -152,7 +152,7 @@ class APIBase {
     try {
       response = await dio
           .patch(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
             data: data,
           )
           .timeout(timeoutDuration);
@@ -191,7 +191,7 @@ class APIBase {
     try {
       response = await dio
           .put(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
             data: data,
           )
           .timeout(timeoutDuration);
@@ -227,7 +227,7 @@ class APIBase {
 
       response = await dio
           .delete(
-            APIRoutes().baseUrl + url,
+            APIRoutes.baseUrl + url,
             data: data,
           )
           .timeout(timeoutDuration);

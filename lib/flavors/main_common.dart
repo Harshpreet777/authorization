@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/theme/themes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:localization/localization.dart';
-import 'router/app_router.dart';
-import 'views/screens/demo_home_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import '../router/app_router.dart';
+import '../views/screens/demo_home_page.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
