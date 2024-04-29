@@ -8,7 +8,7 @@ import '../models/response/error_response_model.dart';
 
 class APIBase {
   Dio? _dio;
-  final _apiRoutes = APIRoutes();
+  //final _apiRoutes = APIRoutes();
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   Duration timeoutDuration = const Duration(seconds: 180);

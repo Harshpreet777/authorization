@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/constants/string_constant.dart';
+
+import 'package:flutter_boilerplate/views/widgets/common_text_widget.dart';
 
 import '../../constants/routes_constant.dart';
+import '../../flavors/main_common.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -14,10 +18,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  void _incrementCounter(BuildContext context) {
     setState(() {
       _counter++;
     });
+
+    if (MyApp.of(context)!.localeName == 'en') {
+      MyApp.of(context)!.setLocale(const Locale('es'));
+    } else {
+      MyApp.of(context)!.setLocale(const Locale('en'));
+    }
   }
 
   @override
@@ -31,8 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            CommonTextWidget(
+              StringConstants().welcomeText,
             ),
             InkWell(
               onTap: () {
@@ -47,7 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          _incrementCounter(context);
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
