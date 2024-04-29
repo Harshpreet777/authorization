@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../constants/api_constant.dart';
 import '../models/response/base_response_model.dart';
-import '../models/response/error_response_model.dart';
 
 class APIBase {
   Dio? _dio;
@@ -65,8 +64,10 @@ class APIBase {
   );
 
 // GET Request
-  Future<APIResponse?> getRequest(String url,
-      {bool isAuthorizationRequired = false, bool showSnackbar = false}) async {
+  Future<APIResponse?> getRequest(
+    String url, {
+    bool isAuthorizationRequired = false,
+  }) async {
     Response response;
     APIResponse? apiResponse;
     Dio dio = getDio(
@@ -83,17 +84,18 @@ class APIBase {
 
       apiResponse = await returnResponse(response);
     } catch (err) {
-      apiResponse = exceptionHandler(err, showSnackbar: showSnackbar);
+      apiResponse = exceptionHandler(err);
     } finally {}
 
     return apiResponse;
   }
 
 // POST Request
-  Future<APIResponse?> postRequest(String url,
-      {dynamic data,
-      bool isAuthorizationRequired = false,
-      bool showSnackbar = true}) async {
+  Future<APIResponse?> postRequest(
+    String url, {
+    dynamic data,
+    bool isAuthorizationRequired = false,
+  }) async {
     APIResponse? apiResponse;
 
     if (data == null ||
@@ -119,15 +121,18 @@ class APIBase {
 
       apiResponse = apiResponse ?? await returnResponse(response);
     } catch (err) {
-      apiResponse = exceptionHandler(err, showSnackbar: showSnackbar);
+      apiResponse = exceptionHandler(err);
     } finally {}
 
     return apiResponse;
   }
 
   // Patch Request
-  Future<APIResponse?> patchRequest(String url, dynamic data,
-      {bool isAuthorizationRequired = false, bool showSnackbar = false}) async {
+  Future<APIResponse?> patchRequest(
+    String url,
+    dynamic data, {
+    bool isAuthorizationRequired = false,
+  }) async {
     if (data == null ||
         data == "" ||
         data == '' ||
@@ -153,15 +158,20 @@ class APIBase {
           .timeout(timeoutDuration);
       apiResponse = await returnResponse(response);
     } catch (err) {
-      apiResponse = exceptionHandler(err, showSnackbar: showSnackbar);
+      apiResponse = exceptionHandler(
+        err,
+      );
     } finally {}
 
     return apiResponse;
   }
 
 // PUT Request
-  Future<APIResponse?> putRequest(String url, dynamic data,
-      {bool isAuthorizationRequired = false, bool showSnackbar = true}) async {
+  Future<APIResponse?> putRequest(
+    String url,
+    dynamic data, {
+    bool isAuthorizationRequired = false,
+  }) async {
     if (data == null ||
         data == "" ||
         data == '' ||
@@ -187,19 +197,20 @@ class APIBase {
           .timeout(timeoutDuration);
       apiResponse = await returnResponse(response);
     } catch (err) {
-      apiResponse = exceptionHandler(err, showSnackbar: showSnackbar);
+      apiResponse = exceptionHandler(err);
     } finally {}
 
     return apiResponse;
   }
 
 // DELETE Request
-  Future<APIResponse?> deleteRequest(String url,
-      {dynamic data,
-      Map<String, dynamic>? header,
-      dynamic id,
-      bool? isAuthorizationRequired,
-      bool showSnackbar = false}) async {
+  Future<APIResponse?> deleteRequest(
+    String url, {
+    dynamic data,
+    Map<String, dynamic>? header,
+    dynamic id,
+    bool? isAuthorizationRequired,
+  }) async {
     if (data == null ||
         data == "" ||
         data == '' ||
@@ -222,7 +233,9 @@ class APIBase {
           .timeout(timeoutDuration);
       apiResponse = await returnResponse(response);
     } catch (err) {
-      apiResponse = exceptionHandler(err, showSnackbar: showSnackbar);
+      apiResponse = exceptionHandler(
+        err,
+      );
     } finally {}
 
     return apiResponse;
@@ -256,24 +269,12 @@ class APIBase {
     }
   }
 
-  dynamic exceptionHandler(ex, {bool? showSnackbar = false}) {
+  dynamic exceptionHandler(ex) {
     if (ex is DioException) {
-      ErrorResponseModel errorResponseModel = ex.response?.data.isEmpty
-          ? ErrorResponseModel(
-              error: Error(errorCode: "0", errorDescription: ""),
-            )
-          : ErrorResponseModel.fromJson(ex.response?.data);
-
-      if (showSnackbar == true) {
-        ///
-      }
-
-      var errorResponseData = {"error": ex.response?.data};
-
       return APIResponse(
-          isSuccess: ex.response?.statusCode == 200 ? true : false,
-          data: errorResponseData,
-          error: errorResponseModel);
+        isSuccess: ex.response?.statusCode == 200 ? true : false,
+        data: ex.response,
+      );
     } else if (ex is SocketException) {
       return APIResponse(
         isSuccess: false,
