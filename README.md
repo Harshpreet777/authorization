@@ -200,3 +200,6 @@ Let us understand one by one what each folder is going to do:
       -   Open XCode for your project > Product > Scheme > Edit Scheme and add the respective configuration file for the flavor.
 
 ![](https://lh7-us.googleusercontent.com/DgTd_T75FqZ52Tp2DR9LtDAxKSxHPGc-OfHDuMftc9FddG-qWVDsH_2mFalyUfCD5BykTTRtD4-BW7oBvs0X398I5Yl4IW0f-rxpox22hElJB2BSlh1FlBDx12PYL0OR8NjbHSxIGMG6L2T0EfLoBkA)
+
+
+**<Note:>** To use boilerplate without flavors, checkout to **dev** branch.
