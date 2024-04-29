@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/constants/string_constant.dart';
 
 import 'package:flutter_boilerplate/views/widgets/common_text_widget.dart';
+import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
-import '../../constants/routes_constant.dart';
 import '../../flavors/main_common.dart';
 import '../../viewmodels/material_app_viewmodel.dart';
 
@@ -18,20 +18,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  void _incrementCounter() {
+    Provider.of<MaterialAppViewModel>(context, listen: false).count++;
+    setState(() {});
+  }
 
-  void _incrementCounter(BuildContext context) {
-    setState(() {
-      _counter++;
-    });
-
+  void changeLanguage() {
     if (MyApp.of(context)!.localeName == 'en') {
       MyApp.of(context)!.setLocale(const Locale('es'));
     } else {
       MyApp.of(context)!.setLocale(const Locale('en'));
     }
-
-    Provider.of<MaterialAppViewModel>(context, listen: false).count++;
   }
 
   @override
@@ -49,25 +46,31 @@ class _MyHomePageState extends State<MyHomePage> {
               StringConstants().welcomeText,
             ),
             CommonTextWidget(
-                "Cart Count: ${Provider.of<MaterialAppViewModel>(context, listen: false).count}"),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.demoPage);
-              },
-              child: Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
+                "${StringConstants().cartCount.i18n()}: ${Provider.of<MaterialAppViewModel>(context, listen: false).count}"),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _incrementCounter(context);
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              _incrementCounter();
+            },
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              changeLanguage();
+            },
+            tooltip: 'Change Language',
+            child: const Icon(Icons.language),
+          ),
+        ],
       ),
     );
   }

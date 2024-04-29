@@ -23,11 +23,7 @@ class CommonTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       data.i18n(),
-      style: style ??
-          Theme.of(context)
-              .textTheme
-              .displayLarge!
-              .copyWith(fontWeight: FontWeight.w400),
+      style: style ?? Theme.of(context).textTheme.displayMedium,
       overflow: overflow ?? TextOverflow.ellipsis,
       maxLines: maxLines ?? 20,
       textAlign: textAlign ?? TextAlign.start,
