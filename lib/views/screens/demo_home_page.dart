@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/constants/enums/state_enums.dart';
 import 'package:flutter_boilerplate/constants/string_constant.dart';
-import 'package:flutter_boilerplate/main.dart';
-import 'package:flutter_boilerplate/views/widgets/common_text_widget.dart';
+import 'package:flutter_boilerplate/models/request/login_request_model.dart';
+import 'package:flutter_boilerplate/utils/helper/global_provider_helper.dart';
+import 'package:flutter_boilerplate/viewmodels/auth_viewmodel.dart';
+import 'package:flutter_boilerplate/views/screens/base_view.dart';
+import 'package:flutter_boilerplate/views/widgets/components/common_text_widget.dart';
+import 'package:flutter_boilerplate/views/widgets/components/custom_scaffold.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 import '../../viewmodels/material_app_viewmodel.dart';
@@ -21,55 +26,62 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
-  void changeLanguage() {
-    if (MyApp.of(context)!.localeName == 'en') {
-      MyApp.of(context)!.setLocale(const Locale('es'));
-    } else {
-      MyApp.of(context)!.setLocale(const Locale('en'));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CommonTextWidget(
-              StringConstants().welcomeText,
+    return BaseView<AuthViewModel>(
+        viewModel: AuthViewModel(),
+        onModelReady: (viewmodel) {},
+        builder: (context, viewmodel, child) {
+          return CustomScaffold(
+            isLoading: viewmodel.state == ViewState.busy,
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              title: Text(widget.title),
             ),
-            CommonTextWidget(
-                "${StringConstants().cartCount.i18n()}: ${Provider.of<MaterialAppViewModel>(context, listen: false).count}"),
-          ],
-        ),
-      ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              _incrementCounter();
-            },
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              changeLanguage();
-            },
-            tooltip: 'Change Language',
-            child: const Icon(Icons.language),
-          ),
-        ],
-      ),
-    );
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CommonTextWidget(
+                    StringConstants().welcomeText,
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      await viewmodel.login(LoginRequestModel(
+                          username: "jhvjh", password: "jhbgjh"));
+                      if (context.mounted) {
+                        context.globalProvider.changeLanguage(context);
+                      }
+                    },
+                    child: CommonTextWidget(
+                        "${StringConstants().cartCount.i18n()}: ${Provider.of<MaterialAppViewModel>(context, listen: false).count}"),
+                  ),
+                ],
+              ),
+            ),
+            floatingActionButton: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    _incrementCounter();
+                  },
+                  tooltip: 'Increment',
+                  child: const Icon(Icons.add),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    context.globalProvider.changeLanguage(context);
+                  },
+                  tooltip: 'Change Language',
+                  child: const Icon(Icons.language),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

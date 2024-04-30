@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/constants/string_constant.dart';
 import 'package:flutter_boilerplate/viewmodels/material_app_viewmodel.dart';
-import 'package:flutter_boilerplate/views/widgets/common_text_widget.dart';
+import 'package:flutter_boilerplate/views/widgets/components/common_text_widget.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
