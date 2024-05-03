@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/viewmodels/base_viewmodel.dart';
 
-import '../flavors/main_common.dart';
+import '../main.dart';
 
 class MaterialAppViewModel extends BaseViewModel {
   int count = 1;
