@@ -1,15 +1,18 @@
 import 'package:flutter_boilerplate/models/response/error_response_model.dart';
 
-class APIResponse<T> {
+interface class APIResponse<T> {
   final bool? isSuccess;
 
-  final T? data;
+  T? data;
+
+  dynamic completeResponse;
 
   final ErrorResponseModel? error;
 
   APIResponse({
     this.isSuccess,
     this.data,
+    this.completeResponse,
     this.error,
   });
 }
