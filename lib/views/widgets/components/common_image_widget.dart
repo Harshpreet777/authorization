@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../theme/app_color.dart';
+import '../../../theme/app_color.dart';
 
+/// [CommonImageWidget] will be used as a common image display widget.
+/// [imageSource] can be [network], [asset] and [svg] image types.
 class CommonImageWidget extends StatelessWidget {
   final Color? bgColor;
   final String imageSource;
