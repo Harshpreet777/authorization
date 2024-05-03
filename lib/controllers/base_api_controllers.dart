@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/models/response/error_response_model.dart';
 import '../constants/api_constant.dart';
 import '../models/response/base_response_model.dart';
 
@@ -147,8 +148,6 @@ class APIBase {
         ) ??
         Dio();
 
-    //Start new relic interaction
-
     try {
       response = await dio
           .patch(
@@ -185,8 +184,6 @@ class APIBase {
           isAuthorizationRequired: isAuthorizationRequired,
         ) ??
         Dio();
-
-    //Start new relic interaction
 
     try {
       response = await dio
@@ -271,10 +268,13 @@ class APIBase {
 
   dynamic exceptionHandler(ex) {
     if (ex is DioException) {
-      return APIResponse(
-        isSuccess: ex.response?.statusCode == 200 ? true : false,
-        data: ex.response,
-      );
+      ErrorResponseModel errorResponseModel = ex.response?.data.isEmpty
+          ? ErrorResponseModel(
+              error: Error(errorCode: "0", errorDescription: ""),
+              statusCode: ex.response?.statusCode ?? 0)
+          : ErrorResponseModel.fromJson(ex.response?.data);
+
+      return APIResponse(isSuccess: false, error: errorResponseModel);
     } else if (ex is SocketException) {
       return APIResponse(
         isSuccess: false,

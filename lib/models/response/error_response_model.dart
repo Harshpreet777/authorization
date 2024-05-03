@@ -1,12 +1,12 @@
 class ErrorResponseModel {
   Error? error;
+  int? statusCode;
 
-  ErrorResponseModel({
-    this.error,
-  });
+  ErrorResponseModel({this.error, this.statusCode});
 
   factory ErrorResponseModel.fromJson(Map<String, dynamic> json) =>
       ErrorResponseModel(
+        statusCode: json["statusCode"],
         error: json["error"] == null ? null : Error.fromJson(json["error"]),
       );
 }
