@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/models/response/error_response_model.dart';
 import '../constants/api_constant.dart';
 import '../models/response/base_response_model.dart';
 
@@ -64,12 +65,12 @@ class APIBase {
   );
 
 // GET Request
-  Future<APIResponse?> getRequest(
+  Future<APIResponse<T>?> getRequest<T>(
     String url, {
     bool isAuthorizationRequired = false,
   }) async {
     Response response;
-    APIResponse? apiResponse;
+    APIResponse<T>? apiResponse;
     Dio dio = getDio(
           isAuthorizationRequired: isAuthorizationRequired,
         ) ??
@@ -82,21 +83,21 @@ class APIBase {
           )
           .timeout(timeoutDuration);
 
-      apiResponse = await returnResponse(response);
+      apiResponse = await returnResponse<T>(response);
     } catch (err) {
-      apiResponse = exceptionHandler(err);
+      apiResponse = exceptionHandler<T>(err);
     } finally {}
 
     return apiResponse;
   }
 
 // POST Request
-  Future<APIResponse?> postRequest(
+  Future<APIResponse<T>?> postRequest<T>(
     String url, {
     dynamic data,
     bool isAuthorizationRequired = false,
   }) async {
-    APIResponse? apiResponse;
+    APIResponse<T>? apiResponse;
 
     if (data == null ||
         data == "" ||
@@ -119,16 +120,16 @@ class APIBase {
           )
           .timeout(timeoutDuration);
 
-      apiResponse = apiResponse ?? await returnResponse(response);
+      apiResponse = apiResponse ?? await returnResponse<T>(response);
     } catch (err) {
-      apiResponse = exceptionHandler(err);
+      apiResponse = exceptionHandler<T>(err);
     } finally {}
 
     return apiResponse;
   }
 
   // Patch Request
-  Future<APIResponse?> patchRequest(
+  Future<APIResponse<T>?> patchRequest<T>(
     String url,
     dynamic data, {
     bool isAuthorizationRequired = false,
@@ -141,13 +142,11 @@ class APIBase {
       data = {};
     }
     Response response;
-    APIResponse? apiResponse;
+    APIResponse<T>? apiResponse;
     Dio dio = getDio(
           isAuthorizationRequired: isAuthorizationRequired,
         ) ??
         Dio();
-
-    //Start new relic interaction
 
     try {
       response = await dio
@@ -156,9 +155,9 @@ class APIBase {
             data: data,
           )
           .timeout(timeoutDuration);
-      apiResponse = await returnResponse(response);
+      apiResponse = await returnResponse<T>(response);
     } catch (err) {
-      apiResponse = exceptionHandler(
+      apiResponse = exceptionHandler<T>(
         err,
       );
     } finally {}
@@ -167,7 +166,7 @@ class APIBase {
   }
 
 // PUT Request
-  Future<APIResponse?> putRequest(
+  Future<APIResponse<T>?> putRequest<T>(
     String url,
     dynamic data, {
     bool isAuthorizationRequired = false,
@@ -180,13 +179,11 @@ class APIBase {
       data = {};
     }
     Response response;
-    APIResponse? apiResponse;
+    APIResponse<T>? apiResponse;
     Dio dio = getDio(
           isAuthorizationRequired: isAuthorizationRequired,
         ) ??
         Dio();
-
-    //Start new relic interaction
 
     try {
       response = await dio
@@ -195,16 +192,16 @@ class APIBase {
             data: data,
           )
           .timeout(timeoutDuration);
-      apiResponse = await returnResponse(response);
+      apiResponse = await returnResponse<T>(response);
     } catch (err) {
-      apiResponse = exceptionHandler(err);
+      apiResponse = exceptionHandler<T>(err);
     } finally {}
 
     return apiResponse;
   }
 
 // DELETE Request
-  Future<APIResponse?> deleteRequest(
+  Future<APIResponse<T>?> deleteRequest<T>(
     String url, {
     dynamic data,
     Map<String, dynamic>? header,
@@ -219,7 +216,7 @@ class APIBase {
       data = {};
     }
     Response response;
-    APIResponse? apiResponse;
+    APIResponse<T>? apiResponse;
 
     try {
       Dio dio =
@@ -231,9 +228,9 @@ class APIBase {
             data: data,
           )
           .timeout(timeoutDuration);
-      apiResponse = await returnResponse(response);
+      apiResponse = await returnResponse<T>(response);
     } catch (err) {
-      apiResponse = exceptionHandler(
+      apiResponse = exceptionHandler<T>(
         err,
       );
     } finally {}
@@ -241,12 +238,12 @@ class APIBase {
     return apiResponse;
   }
 
-  Future<APIResponse?> returnResponse(Response? response) async {
+  Future<APIResponse<T>?> returnResponse<T>(Response? response) async {
     try {
       Response resp = response ?? Response(requestOptions: RequestOptions());
 
-      return APIResponse(
-        data: resp.data,
+      return APIResponse<T>(
+        completeResponse: resp.data,
         isSuccess:
             (resp.data['statusCode'] == 200 || resp.data['statusCode'] == 201)
                 ? true
@@ -255,40 +252,41 @@ class APIBase {
                     : false,
       );
     } on SocketException {
-      return APIResponse(
+      return APIResponse<T>(
         isSuccess: false,
-        data: {},
+        data: null,
       );
     } on DioException catch (error) {
-      return APIResponse(
-        // commit
-
-        data: (error.response?.data ?? {})['data'] ?? {},
+      return APIResponse<T>(
+        completeResponse: (error.response?.data ?? {})['data'] ?? {},
         isSuccess: error.response?.statusCode == 200 ? true : false,
       );
     }
   }
 
-  dynamic exceptionHandler(ex) {
+  APIResponse<T> exceptionHandler<T>(ex) {
     if (ex is DioException) {
-      return APIResponse(
-        isSuccess: ex.response?.statusCode == 200 ? true : false,
-        data: ex.response,
-      );
+      ErrorResponseModel errorResponseModel = ex.response?.data.isEmpty
+          ? ErrorResponseModel(
+              error: Error(errorCode: "0", errorDescription: ""),
+              statusCode: ex.response?.statusCode ?? 0)
+          : ErrorResponseModel.fromJson(ex.response?.data);
+
+      return APIResponse(isSuccess: false, error: errorResponseModel);
     } else if (ex is SocketException) {
-      return APIResponse(
+      return APIResponse<T>(
         isSuccess: false,
-        data: {},
+        data: null,
       );
     } else if (ex is TimeoutException) {
-      return APIResponse(
+      return APIResponse<T>(
         isSuccess: false,
-        data: {},
+        data: null,
       );
     } else {
-      return APIResponse(
+      return APIResponse<T>(
         isSuccess: false,
-        data: {},
+        data: null,
       );
     }
   }
