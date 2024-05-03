@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/constants/enums/state_enums.dart';
 import 'package:flutter_boilerplate/constants/string_constant.dart';
-
-import 'package:flutter_boilerplate/models/request/login_request_model.dart';
 import 'package:flutter_boilerplate/utils/helper/global_provider_helper.dart';
 import 'package:flutter_boilerplate/viewmodels/auth_viewmodel.dart';
 import 'package:flutter_boilerplate/views/screens/base_view.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_boilerplate/views/widgets/components/common_text_widget.
 import 'package:flutter_boilerplate/views/widgets/components/custom_scaffold.dart';
 import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
-
 import '../../viewmodels/material_app_viewmodel.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -49,8 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   InkWell(
                     onTap: () async {
-                      await viewmodel.login(LoginRequestModel(
-                          username: "jhvjh", password: "jhbgjh"));
                       if (context.mounted) {
                         context.globalProvider.changeLanguage(context);
                       }
