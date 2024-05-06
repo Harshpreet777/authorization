@@ -132,7 +132,7 @@ Let us understand one by one what each folder is going to do:
 
         -   Simple flutter run won't work out in the case of flavors. We will need to call the following command to run our app. 
 
-        -   flutter run --flavor flavor_name -t <corresponding main flavor file>
+        -   flutter run --flavor flavor_name -t corresponding_main_flavor_file_path
 
         -   E.g. flutter run --flavor qa -t lib/flavors/main_qa.dart
 
@@ -148,9 +148,9 @@ Let us understand one by one what each folder is going to do:
 
         -   Simple flutter build apk won't work out in case of flavors. We will need to call the following command to build an android apk. 
 
-        -   flutter build apk --release --flavor flavor_name -t <corresponding main flavor file> or
+        -   flutter build apk --release --flavor flavor_name -t corresponding_main_flavor_file_path or
 
-        -   flutter build apk --release --obfuscate --split-debug-info=build/app/outputs/symbols --flavor flavor_name -t <corresponding main flavor file>
+        -   flutter build apk --release --obfuscate --split-debug-info=build/app/outputs/symbols --flavor flavor_name -t corresponding_main_flavor_file_path
 
         -   E.g. flutter build apk --release --flavor qa -t lib/flavors/main_qa.dart or
 
