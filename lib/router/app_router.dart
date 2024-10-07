@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/views/screens/demo_home_page.dart';
-import 'package:flutter_boilerplate/views/screens/demo_screen_2.dart';
+import 'package:flutter_boilerplate/views/screens/home_screen.dart';
 import '../constants/routes_constant.dart';
 
 class PageRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      // How to navigate a screen with arguments.
       case AppRoutes.homePageRoute:
-        String title = settings.arguments as String;
-        return _getPageRoute(MyHomePage(title: title), settings);
-      // Example for how to navigate a screen without arguments.
-      case AppRoutes.demoPage:
-        return _getPageRoute(const DemoPage(), settings);
-      // Will be displayed if no specified route is found.
+        return _getPageRoute( HomeScreen(), settings);
+
       default:
         return MaterialPageRoute(
           builder: (BuildContext context) => Scaffold(

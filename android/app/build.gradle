@@ -2,6 +2,7 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -23,7 +24,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.flutter_boilerplate"
+    namespace "com.example.authentication"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -42,10 +43,10 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.flutter_boilerplate"
+        applicationId "com.example.authentication"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -59,29 +60,15 @@ android {
         }
     }
 
-    flavorDimensions "default"
-
-    productFlavors{
-        prod{
-            resValue "string", "app_name", "Boilerplate App"
-        }
-        dev{
-            resValue "string", "app_name", "Boilerplate App DEV"
-            // commented as it was adding .dev suffix in the original bundleId/ applicationId in android.
-            //applicationIdSuffix ".dev"
-        }
-        
-        qa{
-            resValue "string", "app_name", "Boilerplate App QA"
-             // commented as it was adding .qa suffix in the original bundleId/ applicationId in android.
-            //applicationIdSuffix ".qa"
-        }
-
-    }
 }
 
 flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:33.4.0')
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+    implementation 'com.google.firebase:firebase-auth'
+
+}
