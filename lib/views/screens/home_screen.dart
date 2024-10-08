@@ -33,35 +33,85 @@ class HomeScreen extends StatelessWidget {
                       color: appColor.white,
                     ),
                   ),
+                  buildTextformField(
+                      controller: viewModel.emailController,
+                      hintText: stringConstants.email,
+                      isObscure: false),
+                  buildTextformField(
+                      controller: viewModel.passController,
+                      hintText: stringConstants.pass,
+                      isObscure: true),
                   buildButtons(
-                      title: stringConstants.google,
-                      image: imageConstant.googleIcon,
+                      title: stringConstants.signUp,
+                      image: imageConstant.userIcon,
                       onPressed: () async {
-                        await viewModel.signInWithGoogle();
+                        await viewModel.signUpWithEmailPass();
+                        viewModel.emailController.text = "";
+                        viewModel.passController.text = "";
+                        viewModel.updateUI();
                       }),
-                  buildButtons(
-                      title: stringConstants.facebook,
-                      image: imageConstant.facebookIcon,
-                      onPressed: () async {
-                        await viewModel.signInWithFacebook();
-                      }),
-                  buildButtons(
-                      title: stringConstants.anonymous,
-                      image: imageConstant.anonymousIcon,
-                      onPressed: () async {
-                        await viewModel.signInAnonymous();
-                      }),
-                  buildButtons(
-                      title: stringConstants.mobileNo,
-                      image: imageConstant.phoneIcon,
-                      onPressed: () async {
-                        await viewModel.verifyPhoneNumber("+918510913274");
-                      }),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Divider(
+                      color: appColor.white,
+                    ),
+                  ),
+                  GridView.count(
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    padding: EdgeInsets.zero,
+                    childAspectRatio: 2.4,
+                    children: [
+                      buildButtons(
+                          title: stringConstants.google,
+                          image: imageConstant.googleIcon,
+                          onPressed: () async {
+                            await viewModel.signInWithGoogle();
+                          }),
+                      buildButtons(
+                          title: stringConstants.facebook,
+                          image: imageConstant.facebookIcon,
+                          onPressed: () async {
+                            await viewModel.signInWithFacebook();
+                          }),
+                      buildButtons(
+                          title: stringConstants.anonymous,
+                          image: imageConstant.anonymousIcon,
+                          onPressed: () async {
+                            await viewModel.signInAnonymous();
+                          }),
+                      buildButtons(
+                          title: stringConstants.mobileNo,
+                          image: imageConstant.phoneIcon,
+                          onPressed: () async {
+                            await viewModel.verifyPhoneNumber("+918510913274");
+                          }),
+                    ],
+                  ),
                 ],
               ),
             ),
           );
         });
+  }
+
+  Padding buildTextformField(
+      {required TextEditingController controller,
+      required String hintText,
+      required bool isObscure}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      child: TextFormField(
+        obscureText: isObscure,
+        controller: controller,
+        decoration: InputDecoration(
+            fillColor: appColor.white,
+            filled: true,
+            hintText: hintText,
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: appColor.white))),
+      ),
+    );
   }
 
   Container buildButtons(

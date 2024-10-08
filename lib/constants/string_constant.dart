@@ -7,5 +7,8 @@ class StringConstants {
   final String signIn = "Sign In";
   final String anonymous = "Anonymous";
   final String mobileNo = "Mobile No";
-
+  final String email = "Email";
+  final String pass = "Password";
+  final String signUp = "Sign Up";
+  final String otherSignIn = "Other Sign In Methods";
 }
