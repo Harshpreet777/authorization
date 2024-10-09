@@ -11,4 +11,6 @@ class StringConstants {
   final String pass = "Password";
   final String signUp = "Sign Up";
   final String otherSignIn = "Other Sign In Methods";
+  final String microsoft = "Microsoft";
+  final String twitter = "Twitter";
 }

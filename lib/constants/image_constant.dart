@@ -4,4 +4,6 @@ class ImageConstant {
   final String anonymousIcon = "assets/images/logo/incognito.png";
   final String phoneIcon = "assets/images/logo/phone.png";
   final String userIcon = "assets/images/logo/user.png";
+  final String microsoftIcon = "assets/images/logo/microsoft.png";
+  final String twitterIcon = "assets/images/logo/twitter.png";
 }

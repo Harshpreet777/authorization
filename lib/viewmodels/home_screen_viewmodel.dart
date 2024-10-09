@@ -1,5 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/constants/image_constant.dart';
+import 'package:flutter_boilerplate/constants/key_constant.dart';
+import 'package:flutter_boilerplate/constants/string_constant.dart';
+import 'package:flutter_boilerplate/models/widgets/common_button_model.dart';
 import 'package:flutter_boilerplate/utils/helper/helper_functions.dart';
 import 'package:flutter_boilerplate/viewmodels/base_viewmodel.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -10,23 +14,67 @@ class HomeScreenViewModel extends BaseViewModel {
   final _auth = FirebaseAuth.instance;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
+  final StringConstants stringConstants = StringConstants();
+  final ImageConstant imageConstant = ImageConstant();
+  final HelperFunctions helperFunctions = HelperFunctions();
+  final KeyConstants keyConstants = KeyConstants();
+
+  late List<CommonButtonModel> buttonList = [
+    CommonButtonModel(
+        title: stringConstants.google,
+        image: imageConstant.googleIcon,
+        onPressed: () async {
+          await signInWithGoogle();
+        }),
+    CommonButtonModel(
+        title: stringConstants.facebook,
+        image: imageConstant.facebookIcon,
+        onPressed: () async {
+          await signInWithFacebook();
+        }),
+    CommonButtonModel(
+        title: stringConstants.anonymous,
+        image: imageConstant.anonymousIcon,
+        onPressed: () async {
+          await signInAnonymous();
+        }),
+    CommonButtonModel(
+        title: stringConstants.mobileNo,
+        image: imageConstant.phoneIcon,
+        onPressed: () async {
+          await verifyPhoneNumber("+918510913274");
+        }),
+    CommonButtonModel(
+      title: stringConstants.microsoft,
+      image: imageConstant.microsoftIcon,
+      onPressed: () async {
+        await signInWithMicrosoft();
+      },
+    ),
+    CommonButtonModel(
+      title: stringConstants.twitter,
+      image: imageConstant.twitterIcon,
+      onPressed: () async {
+        //Todo add twitter method
+      },
+    )
+  ];
 
   String verificationID = '';
   Future<void> signInWithFacebook() async {
     try {
       final LoginResult result = await FacebookAuth.instance.login();
+      final accessToken = result.accessToken?.tokenString ?? "";
       if (result.status == LoginStatus.success) {
-        final  facebookCredential =
-            FacebookAuthProvider.credential(
-                result.accessToken?.tokenString ?? '');
-        final  user =
-            await FirebaseAuth.instance.signInWithCredential(facebookCredential);
-        HelperFunctions().logger("${user.user?.email}");
+        final facebookCredential = FacebookAuthProvider.credential(accessToken);
+        final user = await FirebaseAuth.instance
+            .signInWithCredential(facebookCredential);
+        helperFunctions.logger("${user.user?.email}");
       } else {
-        HelperFunctions().logger('Facebook login failed: ${result.message}');
+        helperFunctions.logger('Facebook login failed: ${result.message}');
       }
     } catch (e) {
-      HelperFunctions().logger("Exception -> $e");
+      helperFunctions.logger("Exception -> $e");
     }
   }
 
@@ -44,21 +92,21 @@ class HomeScreenViewModel extends BaseViewModel {
         final user =
             await FirebaseAuth.instance.signInWithCredential(credential);
 
-        HelperFunctions().logger("${user.user?.email}");
+        helperFunctions.logger("${user.user?.email}");
       } else {
-        HelperFunctions().logger('Google login failed');
+        helperFunctions.logger('Google login failed');
       }
     } catch (e) {
-      HelperFunctions().logger("Exception -> $e");
+      helperFunctions.logger("Exception -> $e");
     }
   }
 
   Future<void> signInAnonymous() async {
     try {
       final user = await _auth.signInAnonymously();
-      HelperFunctions().logger(user.user?.uid ?? '');
+      helperFunctions.logger(user.user?.uid ?? '');
     } catch (e) {
-      HelperFunctions().logger("Exception-> $e");
+      helperFunctions.logger("Exception-> $e");
     }
   }
 
@@ -69,7 +117,7 @@ class HomeScreenViewModel extends BaseViewModel {
         try {
           await FirebaseAuth.instance.signInWithCredential(credential);
         } catch (e) {
-          HelperFunctions().logger("Sign in failed -> $e");
+          helperFunctions.logger("Sign in failed -> $e");
         }
       },
       codeSent: (String verificationId, int? resendToken) async {
@@ -83,12 +131,11 @@ class HomeScreenViewModel extends BaseViewModel {
       timeout: const Duration(milliseconds: 10000),
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
-          HelperFunctions().logger('Invalid phone number');
+          helperFunctions.logger('Invalid phone number');
         } else if (e.code == 'too-many-requests') {
-          HelperFunctions()
-              .logger('Too many requests. Please try again later.');
+          helperFunctions.logger('Too many requests. Please try again later.');
         } else {
-          HelperFunctions().logger("Exception -> $e");
+          helperFunctions.logger("Exception -> $e");
         }
       },
     );
@@ -97,7 +144,7 @@ class HomeScreenViewModel extends BaseViewModel {
   Future<bool> verifyOTP(String otp) async {
     var user = await _auth.signInWithCredential(PhoneAuthProvider.credential(
         verificationId: verificationID, smsCode: otp));
-    HelperFunctions().logger(user.toString());
+    helperFunctions.logger(user.toString());
     return user.user != null ? true : false;
   }
 
@@ -105,9 +152,9 @@ class HomeScreenViewModel extends BaseViewModel {
     try {
       final user = await _auth.createUserWithEmailAndPassword(
           email: emailController.text, password: passController.text);
-      HelperFunctions().logger(user.user.toString());
+      helperFunctions.logger(user.user.toString());
     } catch (e) {
-      HelperFunctions().logger("Exception-> $e");
+      helperFunctions.logger("Exception-> $e");
     }
   }
 
@@ -115,9 +162,21 @@ class HomeScreenViewModel extends BaseViewModel {
     try {
       final user = await _auth.signInWithEmailAndPassword(
           email: emailController.text, password: passController.text);
-      HelperFunctions().logger(user.user.toString());
+      helperFunctions.logger(user.user.toString());
     } catch (e) {
-      HelperFunctions().logger("Exception-> $e");
+      helperFunctions.logger("Exception-> $e");
+    }
+  }
+
+  Future<void> signInWithMicrosoft() async {
+    try {
+      final provider = OAuthProvider("microsoft.com");
+      provider.setCustomParameters({"tenant": keyConstants.microsoftTenantKey});
+      provider.addScope("openid");
+      final user = await FirebaseAuth.instance.signInWithProvider(provider);
+      helperFunctions.logger(user.user.toString());
+    } catch (e) {
+      helperFunctions.logger("Exception-> $e");
     }
   }
 }
