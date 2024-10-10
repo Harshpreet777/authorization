@@ -9,6 +9,7 @@ import 'package:flutter_boilerplate/viewmodels/base_viewmodel.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 class HomeScreenViewModel extends BaseViewModel {
   final _auth = FirebaseAuth.instance;
@@ -55,7 +56,14 @@ class HomeScreenViewModel extends BaseViewModel {
       title: stringConstants.twitter,
       image: imageConstant.twitterIcon,
       onPressed: () async {
-        //Todo add twitter method
+        await signInWithTwitter();
+      },
+    ),
+    CommonButtonModel(
+      title: stringConstants.github,
+      image: imageConstant.githubIcon,
+      onPressed: () async {
+        await signInWithGithub();
       },
     )
   ];
@@ -64,7 +72,7 @@ class HomeScreenViewModel extends BaseViewModel {
   Future<void> signInWithFacebook() async {
     try {
       final LoginResult result = await FacebookAuth.instance.login();
-      final accessToken = result.accessToken?.tokenString ?? "";
+      final accessToken = result.accessToken?.token ?? "";
       if (result.status == LoginStatus.success) {
         final facebookCredential = FacebookAuthProvider.credential(accessToken);
         final user = await FirebaseAuth.instance
@@ -177,6 +185,37 @@ class HomeScreenViewModel extends BaseViewModel {
       helperFunctions.logger(user.user.toString());
     } catch (e) {
       helperFunctions.logger("Exception-> $e");
+    }
+  }
+
+  Future<void> signInWithTwitter() async {
+    try {
+      final twitterLogin = TwitterLogin(
+          apiKey: keyConstants.twitterApiKey,
+          apiSecretKey: keyConstants.twitterSecretApiKey,
+          redirectURI: "twittersdk://");
+      final authResult = await twitterLogin.login();
+      if (authResult.status == TwitterLoginStatus.loggedIn) {
+        final AuthCredential twitterAuthCredential =
+            TwitterAuthProvider.credential(
+                accessToken: authResult.authToken!,
+                secret: authResult.authTokenSecret!);
+
+        final user = await _auth.signInWithCredential(twitterAuthCredential);
+        HelperFunctions().logger(user.toString());
+      }
+    } catch (e) {
+      helperFunctions.logger("Exception -> $e");
+    }
+  }
+
+  Future<void> signInWithGithub() async {
+    try {
+      final GithubAuthProvider githubAuthProvider = GithubAuthProvider();
+      final user = await _auth.signInWithProvider(githubAuthProvider);
+      helperFunctions.logger(user.toString());
+    } catch (e) {
+      helperFunctions.logger("Exception -> $e");
     }
   }
 }

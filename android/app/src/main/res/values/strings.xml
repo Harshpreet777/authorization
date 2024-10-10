@@ -5,3 +5,7 @@
 <string name="facebook_client_token">f45f873203fd461f5be38367c56f3132</string>
 <string name="app_name">testing</string>
 </resources>
+<resources>
+    <string name="game_services_project_id" translatable="false">authentication-438106</string>
+    <string name="game_services_oauth_2_web_client_id" translatable="false">868804473652-cdpiefnint0rmj1ek61qb5ksm3bd90u4.apps.googleusercontent.com</string>
+</resources>

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:localization/localization.dart';
 
 class CommonTextWidget extends StatelessWidget {
   final String data;
@@ -22,7 +21,7 @@ class CommonTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      data.i18n(),
+      data,
       style: style ?? Theme.of(context).textTheme.displayMedium,
       overflow: overflow ?? TextOverflow.ellipsis,
       maxLines: maxLines ?? 20,

@@ -4,7 +4,6 @@ class StringConstants {
   final String cartCount = "cart-count";
   final String google = "Google";
   final String facebook = "Facebook";
-  final String signIn = "Sign In";
   final String anonymous = "Anonymous";
   final String mobileNo = "Mobile No";
   final String email = "Email";
@@ -13,4 +12,12 @@ class StringConstants {
   final String otherSignIn = "Other Sign In Methods";
   final String microsoft = "Microsoft";
   final String twitter = "Twitter";
+  final String github = "GitHub";
+  //Login Screen
+  final String login = "Login";
+  final String rememberMe = "Remember me";
+  final String orSignIn = "Or sign in with";
+  final String signIn = "Sign in";
+  final String dontHaveAcc = "Don't have an account?";
+  final String register = "Register";
 }

@@ -12,11 +12,13 @@
             <data android:scheme="fb" />
         </intent>
     </queries>
+   
     
     <application
         android:label="flutter_boilerplate"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+   
         
         <!-- Facebook SDK Metadata -->
         <meta-data 
@@ -41,6 +43,20 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+             <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+                <data android:scheme="twittersdk"/>
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https"/>
+        </intent-filter>
         </activity>
 
         <!-- Facebook SDK Activities -->
@@ -63,5 +79,12 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            <meta-data
+    android:name="com.google.android.gms.games.APP_ID"
+    android:value="@string/game_services_project_id" />
+
+<meta-data
+    android:name="io.revoltgames.game_services_firebase_auth.OAUTH_2_WEB_CLIENT_ID"
+    android:value="@string/game_services_oauth_2_web_client_id" />
     </application>
 </manifest>
