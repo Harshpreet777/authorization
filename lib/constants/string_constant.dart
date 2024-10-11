@@ -17,7 +17,21 @@ class StringConstants {
   final String login = "Login";
   final String rememberMe = "Remember me";
   final String orSignIn = "Or sign in with";
-  final String signIn = "Sign in";
+  final String signIn = "Sign In";
   final String dontHaveAcc = "Don't have an account?";
   final String register = "Register";
+  final String indiaCode = "(+91)";
+  final String numberHint = "0000000000";
+  //Register Screen
+  final String registration = "Registration";
+  final String fullName = "Full Name";
+  final String alreadyHaveAcc = "Already have an account?";
+  //Otp Screen
+  final String verification = "Verification";
+  final String codeMsg = "Code has been send to (+91) ";
+  final String didNotReceiveCode = "Didn't receive code?";
+  final String resendCode = "Resend Code";
+  final String backTo = "Back to";
+  final String codeInvalid = "Code Invalid";
+  final String verify = "Verify";
 }

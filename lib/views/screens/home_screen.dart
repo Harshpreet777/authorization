@@ -5,7 +5,6 @@ import 'package:flutter_boilerplate/theme/app_color.dart';
 import 'package:flutter_boilerplate/viewmodels/home_screen_viewmodel.dart';
 import 'package:flutter_boilerplate/views/screens/base_view.dart';
 import 'package:flutter_boilerplate/views/widgets/app_components/common_button.dart';
-import 'package:flutter_boilerplate/views/widgets/app_components/common_textformfield.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -34,14 +33,14 @@ class HomeScreen extends StatelessWidget {
                       color: appColor.white,
                     ),
                   ),
-                  CommonTextFormField(
-                      controller: viewModel.emailController,
-                      hintText: stringConstants.email,
-                      isObscure: false),
-                  CommonTextFormField(
-                      controller: viewModel.passController,
-                      hintText: stringConstants.pass,
-                      isObscure: true),
+                  // CommonTextFormField(
+                  //     controller: viewModel.emailController,
+                  //     hintText: stringConstants.email,
+                  //     isObscure: false),
+                  // CommonTextFormField(
+                  //     controller: viewModel.passController,
+                  //     hintText: stringConstants.pass,
+                  //     isObscure: true),
                   CommonButton(
                       title: stringConstants.signUp,
                       image: imageConstant.userIcon,

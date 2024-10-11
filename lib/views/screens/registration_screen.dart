@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_boilerplate/constants/image_constant.dart';
 import 'package:flutter_boilerplate/constants/routes_constant.dart';
 import 'package:flutter_boilerplate/constants/string_constant.dart';
 import 'package:flutter_boilerplate/theme/app_color.dart';
-import 'package:flutter_boilerplate/viewmodels/login_screen_viewmodel.dart';
+import 'package:flutter_boilerplate/viewmodels/registration_screen_viewmodel.dart';
 import 'package:flutter_boilerplate/views/screens/base_view.dart';
 import 'package:flutter_boilerplate/views/widgets/app_components/common_icon_button.dart';
 import 'package:flutter_boilerplate/views/widgets/app_components/common_text_button.dart';
@@ -12,29 +11,28 @@ import 'package:flutter_boilerplate/views/widgets/app_components/common_textform
 import 'package:flutter_boilerplate/views/widgets/components/common_text_widget.dart';
 import 'package:flutter_boilerplate/views/widgets/components/custom_scaffold.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class RegistrationScreen extends StatelessWidget {
+  RegistrationScreen({super.key});
   final StringConstants stringConstants = StringConstants();
   final AppColor appColor = AppColor();
-  final ImageConstant imageConstant = ImageConstant();
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<LoginScreenViewModel>(
-      viewModel: LoginScreenViewModel(),
-      onModelReady: (viewModel) {
-        viewModel.numberController.addListener(() {
+    return BaseView<RegistrationScreenViewModel>(
+      viewModel: RegistrationScreenViewModel(),
+      onModelReady: (viewModel) {},
+      builder: (context, viewModel, child) {
+        WidgetsBinding.instance.addPostFrameCallback((v) {
           viewModel.buttonDisable();
         });
-      },
-      builder: (context, viewModel, child) {
         return CustomScaffold(
             showAppBar: false, body: buildBody(viewModel, context));
       },
     );
   }
 
-  Widget buildBody(LoginScreenViewModel viewModel, BuildContext context) {
+  Widget buildBody(
+      RegistrationScreenViewModel viewModel, BuildContext context) {
     return SafeArea(
       child: Form(
         key: viewModel.formKey,
@@ -48,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.center,
                       child: CommonTextWidget(
-                        stringConstants.login,
+                        stringConstants.registration,
                         style: TextStyle(
                             color: appColor.primary400,
                             fontSize: 30,
@@ -58,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 20),
+                          vertical: 12, horizontal: 20),
                       child: CommonTextFormField(
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(10)
@@ -70,6 +68,28 @@ class LoginScreen extends StatelessWidget {
                           isFlag: true,
                           hintText: stringConstants.numberHint,
                           textEditingController: viewModel.numberController)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 20),
+                    child: CommonTextFormField(
+                        hintText: stringConstants.email,
+                        validator: (value) {
+                          return viewModel.emailValidation(value ?? '');
+                        },
+                        iconData: Icons.mail,
+                        textEditingController: viewModel.emailController),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 20),
+                    child: CommonTextFormField(
+                        validator: (value) {
+                          return viewModel.nameValidation(value ?? '');
+                        },
+                        hintText: stringConstants.fullName,
+                        iconData: Icons.person,
+                        textEditingController: viewModel.nameController),
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +124,7 @@ class LoginScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               child: CommonButton(
                 isDisable: viewModel.isDisable,
-                text: stringConstants.signIn,
+                text: stringConstants.register,
                 onPressed: () {
                   viewModel.onSumbit();
                 },
@@ -159,7 +179,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CommonTextWidget(
-                    stringConstants.dontHaveAcc,
+                    stringConstants.alreadyHaveAcc,
                     style: TextStyle(
                         color: appColor.neutral900,
                         fontSize: 16,
@@ -172,11 +192,11 @@ class LoginScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        AppRoutes.registerRoute,
+                        AppRoutes.loginRoute,
                       );
                     },
                     child: CommonTextWidget(
-                      stringConstants.register,
+                      stringConstants.signIn,
                       style: TextStyle(
                           color: appColor.primary500,
                           fontSize: 16,

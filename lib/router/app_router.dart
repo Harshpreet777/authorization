@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/views/screens/home_screen.dart';
+import 'package:flutter_boilerplate/views/screens/login_screen.dart';
+import 'package:flutter_boilerplate/views/screens/registration_screen.dart';
 import '../constants/routes_constant.dart';
 
 class PageRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.homePageRoute:
-        return _getPageRoute( HomeScreen(), settings);
+        return _getPageRoute(HomeScreen(), settings);
+      case AppRoutes.loginRoute:
+        return _getPageRoute(LoginScreen(), settings);
+      case AppRoutes.registerRoute:
+        return _getPageRoute(RegistrationScreen(), settings);
 
       default:
         return MaterialPageRoute(
