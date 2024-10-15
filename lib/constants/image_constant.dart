@@ -10,4 +10,8 @@ class ImageConstant {
   final String flagIcon = "assets/images/logo/flag.png";
   final String arrowDownIcon = "assets/images/logo/arrow_down.png";
   final String clockIcon = "assets/images/logo/clock.png";
+  final String profileIcon = "assets/images/logo/profile.png";
+  final String searchIcon = "assets/images/logo/search.png";
+  final String pizzaImg = "assets/images/logo/pizza.jpg";
+  final String arrowIcon = "assets/images/logo/arrow.png";
 }

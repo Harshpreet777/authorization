@@ -34,4 +34,12 @@ class StringConstants {
   final String backTo = "Back to";
   final String codeInvalid = "Code Invalid";
   final String verify = "Verify";
+  //Home Screen
+  final String deliverTo = "Deliver to:";
+  final String address = "08776 Serenity Ports, New York";
+  final String searchBarText = "Search for a vendor or product";
+  final String popularRestaurants = "Popular Restaurants";
+  final String viewAll = "View all";
+  final String thePizzaPlace = "The Pizza Place";
+  final String distance = "2km away";
 }

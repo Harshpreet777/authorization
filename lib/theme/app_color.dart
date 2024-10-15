@@ -20,4 +20,13 @@ class AppColor {
   final Color neutral400 = const Color(0xff4c555f);
   final Color neutral900 = const Color(0xff0d1217);
   final Color fillColor = const Color(0xffF4F4F5);
+  final Color black200 = const Color(0xff171819);
+  final Color black500 = const Color(0xff797D82);
+  final Color successColor = const Color(0xff53A654);
+  final Color errorColor = const Color(0xffF84545);
+  final Color secondary100 = const Color(0xffFFA500);
+  final Color secondary200 = const Color(0xffE59400);
+  final Color secondary300 = const Color(0xffCF8600);
+  final Color secondary400 = const Color(0xffBA7800);
+  final Color secondary500 = const Color(0xffA76C00);
 }

@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -66,6 +57,37 @@ class DefaultFirebaseOptions {
     androidClientId: '144260798445-20dqj5q6m7o92kgq89jnku63no3aa9dh.apps.googleusercontent.com',
     iosClientId: '144260798445-h0jht1bonj3aj78gu6079pqh68938ksc.apps.googleusercontent.com',
     iosBundleId: 'com.example.authentication',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDyk_yVf7tV4Ix0kOc2cOk-2cXaPUyillM',
+    appId: '1:144260798445:web:261d4c22aef2e5a17c79e4',
+    messagingSenderId: '144260798445',
+    projectId: 'authentication-afa13',
+    authDomain: 'authentication-afa13.firebaseapp.com',
+    storageBucket: 'authentication-afa13.appspot.com',
+    measurementId: 'G-YQ9XNRJWCS',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDN_oConeN1zLN-_FxLgIgRXhjLh16SFN0',
+    appId: '1:144260798445:ios:83eb7bdf348d248c7c79e4',
+    messagingSenderId: '144260798445',
+    projectId: 'authentication-afa13',
+    storageBucket: 'authentication-afa13.appspot.com',
+    androidClientId: '144260798445-20dqj5q6m7o92kgq89jnku63no3aa9dh.apps.googleusercontent.com',
+    iosClientId: '144260798445-rempm64rmq4pvr6h55a6eddloq9fsf43.apps.googleusercontent.com',
+    iosBundleId: 'com.example.flutterBoilerplate',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDyk_yVf7tV4Ix0kOc2cOk-2cXaPUyillM',
+    appId: '1:144260798445:web:35d2ba283038cb027c79e4',
+    messagingSenderId: '144260798445',
+    projectId: 'authentication-afa13',
+    authDomain: 'authentication-afa13.firebaseapp.com',
+    storageBucket: 'authentication-afa13.appspot.com',
+    measurementId: 'G-0EEY5HJNQQ',
   );
 
 }
