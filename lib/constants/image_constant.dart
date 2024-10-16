@@ -14,4 +14,8 @@ class ImageConstant {
   final String searchIcon = "assets/images/logo/search.png";
   final String pizzaImg = "assets/images/logo/pizza.jpg";
   final String arrowIcon = "assets/images/logo/arrow.png";
+  final String locationIcon = "assets/images/logo/location.png";
+  final String iceCreamImg = "assets/images/logo/icecream.jpg";
+  final String burgerImg = "assets/images/logo/burger.jpg";
+  final String coffeeImg = "assets/images/logo/coffee.jpg";
 }

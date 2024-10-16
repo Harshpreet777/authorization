@@ -4,7 +4,7 @@ import 'package:flutter_boilerplate/firebase_options.dart';
 import 'package:flutter_boilerplate/theme/themes.dart';
 import 'package:flutter_boilerplate/viewmodels/material_app_viewmodel.dart';
 import 'package:flutter_boilerplate/views/screens/base_view.dart';
-import 'package:flutter_boilerplate/views/screens/home_screen.dart';
+import 'package:flutter_boilerplate/views/screens/menu_screen.dart';
 
 import 'router/app_router.dart';
 
@@ -36,7 +36,7 @@ class MyAppState extends State<MyApp> {
             onGenerateRoute: PageRouter.generateRoute,
             theme: lightTheme(context),
             darkTheme: darkTheme(context),
-            home: HomeScreen(),
+            home:  MenuScreen(),
           );
         });
   }

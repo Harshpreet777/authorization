@@ -19,7 +19,7 @@ class AuthTestScreen extends StatelessWidget {
         onModelReady: (viewModel) {},
         builder: (context, viewModel, child) {
           return Scaffold(
-            bottomNavigationBar: BottomAppBar(shape: CircularNotchedRectangle(),),
+            bottomNavigationBar: const BottomAppBar(shape: CircularNotchedRectangle(),),
             backgroundColor: appColor.black,
             body: Container(
               alignment: Alignment.center,

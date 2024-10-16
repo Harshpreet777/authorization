@@ -41,5 +41,12 @@ class StringConstants {
   final String popularRestaurants = "Popular Restaurants";
   final String viewAll = "View all";
   final String thePizzaPlace = "The Pizza Place";
-  final String distance = "2km away";
+  final String distance = "km away";
+  final String iceCreamFactory = "The Ice Cream Factory";
+  final String burgerKing = "Burger King";
+  final String theCoffeeHouse = "The Coffee House";
+  //Menu Screen
+  // ignore: unnecessary_string_escapes
+  final String freeDelivery = "Free delivery on orders above \&50";
+  final String deliveryTime = "20-30 mins delivery";
 }

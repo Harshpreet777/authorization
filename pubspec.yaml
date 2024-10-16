@@ -50,6 +50,7 @@ dependencies:
   firebase_core: 
   twitter_login: 
   cloud_firestore: 
+  country_picker: ^2.0.26
 
 
 dev_dependencies:

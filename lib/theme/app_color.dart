@@ -29,4 +29,6 @@ class AppColor {
   final Color secondary300 = const Color(0xffCF8600);
   final Color secondary400 = const Color(0xffBA7800);
   final Color secondary500 = const Color(0xffA76C00);
+  final Color starColor = const Color(0xffFFD700);
+  final Color blackAlpha100 = Colors.black.withAlpha(100);
 }

@@ -137,3 +137,6 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
 /lib/constants/key_constant.dart
+pubspec.lock
+firebase.json
+/lib/firebase_options.dart

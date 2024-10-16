@@ -1,3 +1,4 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_boilerplate/constants/image_constant.dart';
@@ -5,8 +6,8 @@ import 'package:flutter_boilerplate/constants/string_constant.dart';
 import 'package:flutter_boilerplate/theme/app_color.dart';
 import 'package:flutter_boilerplate/views/widgets/components/common_text_widget.dart';
 
-class CommonTextFormField extends StatelessWidget {
-  CommonTextFormField(
+class CommonTextFormField extends StatefulWidget {
+  const CommonTextFormField(
       {super.key,
       this.hintText,
       required this.textEditingController,
@@ -22,7 +23,6 @@ class CommonTextFormField extends StatelessWidget {
       this.focusNode,
       this.onTap,
       this.keyboardType});
-  final AppColor appColor = AppColor();
   final String? hintText;
   final TextEditingController textEditingController;
   final bool isObscure;
@@ -33,34 +33,47 @@ class CommonTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final void Function()? onTap;
   final void Function(String)? onChanged;
-  final ImageConstant imageConstant = ImageConstant();
-  final StringConstants stringConstants = StringConstants();
   final TextStyle? style;
   final TextAlign textAlign;
   final EdgeInsetsGeometry? contentPadding;
   final FocusNode? focusNode;
 
   @override
+  State<CommonTextFormField> createState() => _CommonTextFormFieldState();
+}
+
+class _CommonTextFormFieldState extends State<CommonTextFormField> {
+  final AppColor appColor = AppColor();
+
+  final ImageConstant imageConstant = ImageConstant();
+
+  final StringConstants stringConstants = StringConstants();
+
+  String countryFlag = '🇮🇳';
+  String countryCode = '91';
+  String hintText = '9123456789';
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      focusNode: focusNode,
-      onTap: onTap,
+      focusNode: widget.focusNode,
+      onTap: widget.onTap,
       showCursor: false,
-      onChanged: onChanged,
-      textAlign: textAlign,
-      style: style,
-      keyboardType: keyboardType,
-      validator: validator,
-      inputFormatters: inputFormatters,
-      obscureText: isObscure,
-      controller: textEditingController,
+      onChanged: widget.onChanged,
+      textAlign: widget.textAlign,
+      style: widget.style,
+      keyboardType: widget.keyboardType,
+      validator: widget.validator,
+      inputFormatters: widget.inputFormatters,
+      obscureText: widget.isObscure,
+      controller: widget.textEditingController,
       decoration: InputDecoration(
           fillColor: appColor.fillColor,
-          contentPadding: contentPadding ??
+          contentPadding: widget.contentPadding ??
               const EdgeInsets.symmetric(vertical: 17, horizontal: 15),
           filled: true,
-          hintText: hintText ?? '',
-          prefixIcon: isFlag == true
+          hintText: hintText,
+          prefixIcon: widget.isFlag == true
               ? Padding(
                   padding: const EdgeInsets.only(left: 20, right: 10),
                   child: Row(
@@ -69,22 +82,35 @@ class CommonTextFormField extends StatelessWidget {
                       ClipRRect(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10)),
-                        child: Image.asset(
-                          imageConstant.flagIcon,
-                          fit: BoxFit.cover,
-                          width: 28,
+                        child: CommonTextWidget(
+                          countryFlag,
+                          style: const TextStyle(fontSize: 30),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 18),
-                        child: Image.asset(
-                          imageConstant.arrowDownIcon,
-                          fit: BoxFit.cover,
-                          width: 15,
+                        child: GestureDetector(
+                          onTap: () {
+                            showCountryPicker(
+                              context: context,
+                              showPhoneCode: true,
+                              onSelect: (Country country) {
+                                countryFlag = country.flagEmoji;
+                                countryCode = country.phoneCode;
+                                hintText = country.example;
+                                setState(() {});
+                              },
+                            );
+                          },
+                          child: Image.asset(
+                            imageConstant.arrowDownIcon,
+                            fit: BoxFit.cover,
+                            width: 15,
+                          ),
                         ),
                       ),
                       CommonTextWidget(
-                        stringConstants.indiaCode,
+                        "(+$countryCode)",
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -93,9 +119,9 @@ class CommonTextFormField extends StatelessWidget {
                     ],
                   ),
                 )
-              : iconData != null
+              : widget.iconData != null
                   ? Icon(
-                      iconData,
+                      widget.iconData,
                       color: appColor.neutral100,
                     )
                   : null,
