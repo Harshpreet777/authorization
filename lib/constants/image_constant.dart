@@ -18,4 +18,16 @@ class ImageConstant {
   final String iceCreamImg = "assets/images/logo/icecream.jpg";
   final String burgerImg = "assets/images/logo/burger.jpg";
   final String coffeeImg = "assets/images/logo/coffee.jpg";
+  final String pizza1Img = "assets/images/logo/pizza1.png";
+  final String pizza2Img = "assets/images/logo/pizza2.png";
+  final String pizza3Img = "assets/images/logo/pizza3.png";
+  final String pizza4Img = "assets/images/logo/pizza4.png";
+  final String pizza5Img = "assets/images/logo/pizza5.png";
+  final String pizza6Img = "assets/images/logo/pizza6.png";
+  final String pizza7Img = "assets/images/logo/pizza7.png";
+  final String chickenWing = "assets/images/logo/chicken_wings.png";
+  final String frenchFries = "assets/images/logo/french_fries.png";
+  final String salad = "assets/images/logo/salad.png";
+  final String soda = "assets/images/logo/soda.png";
+  final String water = "assets/images/logo/water.png";
 }

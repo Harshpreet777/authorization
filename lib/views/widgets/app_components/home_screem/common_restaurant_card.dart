@@ -5,7 +5,8 @@ import 'package:flutter_boilerplate/constants/string_constant.dart';
 import 'package:flutter_boilerplate/models/response/restaurants_repsonse_model.dart';
 import 'package:flutter_boilerplate/theme/app_color.dart';
 import 'package:flutter_boilerplate/utils/helper/responsive_helper.dart';
-import 'package:flutter_boilerplate/views/widgets/app_components/home_screem.dart/custom_clipper.dart';
+import 'package:flutter_boilerplate/views/widgets/app_components/common_review.dart';
+import 'package:flutter_boilerplate/views/widgets/app_components/home_screem/custom_clipper.dart';
 import 'package:flutter_boilerplate/views/widgets/components/common_text_widget.dart';
 
 class CommonRestaurantCard extends StatelessWidget {
@@ -66,38 +67,7 @@ class CommonRestaurantCard extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            children: [
-              Row(
-                children: List.generate(
-                    5,
-                    (index) => Icon(
-                          Icons.star,
-                          size: 20,
-                          color: appColor.starColor,
-                        )),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 140, right: 10),
-                child: Image.asset(
-                  imageConstant.locationIcon,
-                  color: appColor.black.withOpacity(0.4),
-                  fit: BoxFit.contain,
-                  height: 20,
-                ),
-              ),
-              Flexible(
-                child: CommonTextWidget(
-                  '${model.distance}${stringConstants.distance}',
-                  style: TextStyle(
-                      color: appColor.black.withOpacity(0.4),
-                      fontSize: 15,
-                      fontFamily: fontConstants.gilroy,
-                      fontWeight: FontWeight.w400),
-                ),
-              )
-            ],
-          )
+          CommonReviewWidget(distance: model.distance)
         ],
       ),
     );

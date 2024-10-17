@@ -5,7 +5,7 @@ import 'package:flutter_boilerplate/constants/string_constant.dart';
 import 'package:flutter_boilerplate/theme/app_color.dart';
 import 'package:flutter_boilerplate/viewmodels/home_screen_viewmodel.dart';
 import 'package:flutter_boilerplate/views/screens/base_view.dart';
-import 'package:flutter_boilerplate/views/widgets/app_components/home_screem.dart/common_restaurant_card.dart';
+import 'package:flutter_boilerplate/views/widgets/app_components/home_screem/common_restaurant_card.dart';
 import 'package:flutter_boilerplate/views/widgets/components/common_single_child_scrollview.dart';
 import 'package:flutter_boilerplate/views/widgets/components/common_text_widget.dart';
 import 'package:flutter_boilerplate/views/widgets/components/custom_scaffold.dart';

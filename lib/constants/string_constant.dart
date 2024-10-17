@@ -49,4 +49,22 @@ class StringConstants {
   // ignore: unnecessary_string_escapes
   final String freeDelivery = "Free delivery on orders above \&50";
   final String deliveryTime = "20-30 mins delivery";
+  final String comboDeals = "Combo deals";
+  final String classicPizza = "Classic Pizza";
+  final String premiumPizza = "Premium Pizza";
+  final String sides = "Sides";
+  final String drinks = "Drinks";
+  final String kingsDeal = "Kings Deal";
+  final String bbqChicken = "BBQ Chicken";
+  final String bbqBeef = "BBQ Beef";
+  final String veggieSupreme = "Veggie Supreme";
+  final String bbqMega = "BBQ Mega";
+  final String chickenBali = "Chicken Bali";
+  final String extravaganzza = "Extravaganzza";
+  final String chickenWings = "Chicken Wings";
+  final String frenchFries = "French Fries";
+  final String salad = "Salad";
+  final String soda = "Soda";
+  final String water = "Water";
+  final String price = "\$20.34";
 }

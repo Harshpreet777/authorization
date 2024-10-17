@@ -51,7 +51,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
 
   String countryFlag = '🇮🇳';
   String countryCode = '91';
-  String hintText = '9123456789';
+  String exampleText = '9123456789';
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
           contentPadding: widget.contentPadding ??
               const EdgeInsets.symmetric(vertical: 17, horizontal: 15),
           filled: true,
-          hintText: hintText,
+          hintText: widget.hintText??exampleText,
           prefixIcon: widget.isFlag == true
               ? Padding(
                   padding: const EdgeInsets.only(left: 20, right: 10),
@@ -97,7 +97,7 @@ class _CommonTextFormFieldState extends State<CommonTextFormField> {
                               onSelect: (Country country) {
                                 countryFlag = country.flagEmoji;
                                 countryCode = country.phoneCode;
-                                hintText = country.example;
+                                exampleText = country.example;
                                 setState(() {});
                               },
                             );
