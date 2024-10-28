@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/constants/font_constant.dart';
 import 'package:flutter_boilerplate/constants/image_constant.dart';
 import 'package:flutter_boilerplate/constants/string_constant.dart';

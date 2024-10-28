@@ -67,4 +67,14 @@ class StringConstants {
   final String soda = "Soda";
   final String water = "Water";
   final String price = "\$20.34";
+  final String large = "Large";
+  final String medium = "Medium";
+  final String small = "Small";
+  final String addToBag = "Add to bag";
+  final String myBag = "My Bag";
+  final String enterPromoCode = "Enter promo code";
+  final String total = "Total";
+  final String subTotal = "Subtotal";
+  final String delivery = "Delivery";
+  final String checkOut = "Checkout";
 }

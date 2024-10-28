@@ -16,59 +16,57 @@ class CommonMenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            image,
-            height: 100,
-          ),
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: CommonTextWidget(
-                      name,
-                      style: TextStyle(
-                          color: appColor.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: fontConstants.gilroy),
-                    ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Image.asset(
+          image,
+          height: 100,
+        ),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: CommonTextWidget(
+                    name,
+                    style: TextStyle(
+                        color: appColor.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: fontConstants.gilroy),
                   ),
-                  Flexible(
-                    child: CommonTextWidget(
-                      desc,
-                      style: TextStyle(
-                          color: appColor.black.withOpacity(0.6),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: fontConstants.gilroy),
-                    ),
-                  )
-                ],
-              ),
+                ),
+                Flexible(
+                  child: CommonTextWidget(
+                    desc,
+                    style: TextStyle(
+                        color: appColor.black.withOpacity(0.6),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: fontConstants.gilroy),
+                  ),
+                )
+              ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 35, right: 20),
-            child: CommonTextWidget(
-              stringConstants.price,
-              style: TextStyle(
-                  fontSize: 13,
-                  color: appColor.black,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: fontConstants.gilroy),
-            ),
-          )
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 35, right: 20),
+          child: CommonTextWidget(
+            stringConstants.price,
+            style: TextStyle(
+                fontSize: 13,
+                color: appColor.black,
+                fontWeight: FontWeight.w500,
+                fontFamily: fontConstants.gilroy),
+          ),
+        )
+      ],
     );
   }
 }

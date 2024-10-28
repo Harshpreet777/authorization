@@ -19,4 +19,6 @@ class MessageConstant {
   final String salad = "Choose between - Caesar, Avocado or Greek-wedge";
   final String soda = "Choose between a wide range of soda drinks";
   final String water = "Choose between - regular or sparkling";
+  final String selectVariant = "Select Variant";
+  final String selectPetDrink = "Select pet drink";
 }

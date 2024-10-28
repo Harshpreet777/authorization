@@ -8,6 +8,20 @@ class MenuScreenViewModel extends BaseViewModel {
   final ImageConstant imageConstant = ImageConstant();
   final StringConstants stringConstants = StringConstants();
   final MessageConstant messageConstant = MessageConstant();
+  int count = 1;
+
+  void increaseCount() {
+    count = count + 1;
+    updateUI();
+  }
+
+  void decreaseCount() {
+    if (count > 1) {
+      count = count - 1;
+      updateUI();
+    }
+  }
+
   late List<MenuCardScreenModel> classicPizzaList = [
     MenuCardScreenModel(
         image: imageConstant.pizza2Img,
@@ -59,5 +73,14 @@ class MenuScreenViewModel extends BaseViewModel {
         image: imageConstant.water,
         desc: messageConstant.water,
         name: stringConstants.water),
+  ];
+  late List<String> petDrinkList = [
+    "Coke",
+    "Sprite",
+    "Fanta",
+    "Pepsi",
+    "Beer",
+    "Lemondade",
+    "Water"
   ];
 }
